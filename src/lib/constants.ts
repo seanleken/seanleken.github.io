@@ -1,4 +1,8 @@
-export const EXAMPLE_PATH = "blog-starter";
-export const CMS_NAME = "Markdown";
-export const HOME_OG_IMAGE_URL =
-  "https://og-image.vercel.app/Next.js%20Blog%20Starter%20Example.png?theme=light&md=1&fontSize=100px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg";
+export const SITE_NAME = "Sean Pertet";
+export const SITE_TITLE = "Sean Pertet | Cloud Engineer";
+export const SITE_DESCRIPTION =
+  "Building scalable cloud infrastructure and enterprise integrations for UK's leading e-commerce consultancies. Specialized in GCP, event-driven architecture, and platform migrations.";
+export const HOME_OG_IMAGE_URL = "/assets/og-image.png";
+export const CONTACT_EMAIL = "seanleken43@gmail.com";
+export const CONTACT_PHONE = "+254740796674";
+export const CONTACT_LOCATION = "Nairobi, Kenya";

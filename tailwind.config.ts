@@ -20,6 +20,13 @@ const config: Config = {
         "accent-7": "#333",
         success: "#0070f3",
         cyan: "#79FFE1",
+        "portfolio-navy": "#0F172A",
+        "portfolio-slate": "#475569",
+        "portfolio-light-slate": "#94A3B8",
+        "portfolio-blue": "#3B82F6",
+        "portfolio-emerald": "#10B981",
+        "portfolio-amber": "#F59E0B",
+        "portfolio-off-white": "#F8FAFC",
       },
       spacing: {
         28: "7rem",

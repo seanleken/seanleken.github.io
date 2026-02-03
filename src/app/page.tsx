@@ -1,30 +1,27 @@
-import Container from "@/app/_components/container";
-import { HeroPost } from "@/app/_components/hero-post";
-import { Intro } from "@/app/_components/intro";
-import { MoreStories } from "@/app/_components/more-stories";
+import { Hero } from "@/app/_components/hero";
+import { EnterpriseExperience } from "@/app/_components/enterprise-experience";
+import { TechStack } from "@/app/_components/tech-stack";
+import { Timeline } from "@/app/_components/timeline";
+import { BlogPreview } from "@/app/_components/blog-preview";
+import { Contact } from "@/app/_components/contact";
+import { SectionSeparator } from "@/app/_components/section-separator";
 import { getAllPosts } from "@/lib/api";
 
-export default function Index() {
-  const allPosts = getAllPosts();
-
-  const heroPost = allPosts[0];
-
-  const morePosts = allPosts.slice(1);
+export default function Home() {
+  const posts = getAllPosts();
 
   return (
-    <main>
-      <Container>
-        <Intro />
-        <HeroPost
-          title={heroPost.title}
-          coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-      </Container>
+    <main className="pt-16">
+      <Hero />
+      <SectionSeparator />
+      <EnterpriseExperience />
+      <SectionSeparator />
+      <TechStack />
+      <SectionSeparator />
+      <Timeline />
+      <SectionSeparator />
+      <BlogPreview posts={posts} />
+      <Contact />
     </main>
   );
 }
