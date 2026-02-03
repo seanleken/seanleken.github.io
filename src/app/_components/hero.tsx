@@ -3,12 +3,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Terminal } from "./terminal";
 
 export function Hero() {
   return (
     <section className="py-24 md:py-32 bg-portfolio-off-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+        {/* Top section: Name + Headshot */}
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16 mb-12">
           {/* Text Content */}
           <motion.div
             className="flex-1"
@@ -16,16 +18,11 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-portfolio-navy dark:text-white mb-6">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-portfolio-navy dark:text-white mb-4">
               Sean Pertet
             </h1>
             <p className="text-2xl md:text-3xl text-portfolio-slate dark:text-portfolio-light-slate mb-6">
               Cloud Engineer & E-commerce Specialist
-            </p>
-            <p className="text-lg text-portfolio-slate dark:text-portfolio-light-slate leading-relaxed mb-8 max-w-2xl">
-              Building scalable cloud infrastructure and enterprise integrations
-              for UK's leading e-commerce consultancies. Specialized in GCP,
-              event-driven architecture, and platform migrations.
             </p>
             <motion.div
               className="flex flex-col sm:flex-row gap-4"
@@ -70,6 +67,9 @@ export function Hero() {
             </div>
           </motion.div>
         </div>
+
+        {/* Terminal - the showstopper */}
+        <Terminal />
       </div>
     </section>
   );
