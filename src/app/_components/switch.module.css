@@ -1,9 +1,9 @@
 .switch {
   all: unset;
+  display: none;
   position: absolute;
   right: 20px;
   top: 70px;
-  display: inline-block;
   color: currentColor;
   border-radius: 50%;
   border: 1px dashed currentColor;
@@ -16,13 +16,13 @@
 
 [data-mode="system"] .switch::after {
   position: absolute;
+  display: none;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   font-weight: 600;
   font-size: calc(var(--size) / 2);
-  display: flex;
   align-items: center;
   justify-content: center;
   content: "A";

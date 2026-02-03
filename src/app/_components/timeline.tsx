@@ -71,7 +71,7 @@ function TimelineItem({ exp, index }: { exp: Experience; index: number }) {
     >
       {/* Animated dot */}
       <motion.div
-        className={`absolute left-0 md:left-[12.4px] top-1.5 w-2 h-2 rounded-full -translate-x-1/2 ${
+        className={`absolute left-[-3.5px] md:left-[12.4px] top-1.5 w-2 h-2 rounded-full -translate-x-1/2 ${
           exp.current ? "bg-portfolio-emerald" : "bg-portfolio-slate"
         }`}
         initial={{ scale: 0 }}
@@ -82,7 +82,7 @@ function TimelineItem({ exp, index }: { exp: Experience; index: number }) {
       {/* Pulse effect for current role */}
       {exp.current && (
         <motion.div
-          className="absolute left-0 md:left-[12.4px] top-1.5 w-2 h-2 rounded-full -translate-x-1/2 bg-portfolio-emerald"
+          className="absolute left-[-3.5px] md:left-[12.4px] top-1.5 w-2 h-2 rounded-full -translate-x-1/2 bg-portfolio-emerald"
           initial={{ scale: 1, opacity: 0.5 }}
           animate={{ scale: 2, opacity: 0 }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeOut" }}
