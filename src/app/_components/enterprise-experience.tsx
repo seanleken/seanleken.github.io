@@ -17,8 +17,7 @@ export function EnterpriseExperience() {
               </span>
               <span className="text-portfolio-slate dark:text-portfolio-light-slate">
                 {" "}
-                (UK E-commerce Consultancy) — Senior Developer → Developer →
-                Graduate
+                (UK E-commerce Consultancy) — Graduate Developer → Developer →  Senior Developer
               </span>
             </div>
           </li>
