@@ -41,7 +41,9 @@ function BlogCard({ post }: { post: Post }) {
   return (
     <article className="group border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden hover:border-portfolio-blue hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
       <Link href={`/blog/${post.slug}`}>
-        <CoverImage title={post.title} src={post.coverImage} />
+        <div className="max-h-48 overflow-hidden">
+          <CoverImage title={post.title} src={post.coverImage} />
+        </div>
         <div className="p-6">
           <div className="text-sm font-mono text-portfolio-slate dark:text-portfolio-light-slate mb-2">
             <DateFormatter dateString={post.date} />
