@@ -46,7 +46,7 @@ const projects = [
   {
     title: "Trouvaille",
     description:
-      "Static brochure site for a fictional boutique natural wine bar in Marseille, France. Single-page layout with sections for the wine philosophy, pours, story, and location — styled with a warm editorial palette of terracotta, ochre, and cream. Built with Astro and Tailwind CSS, with a small vanilla JS layer for scroll reveals and the mobile menu.",
+      "Static brochure site for a fictional boutique natural wine bar in Marseille, France. Single-page layout with sections for the wine philosophy, pours, story, and location — styled with a warm editorial palette of terracotta, ochre, and cream. Built with plain HTML and CSS, with a small vanilla JS layer for scroll reveals and the mobile menu.",
     tags: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/trouvaille-static",
     liveUrl: "https://trouvaille-static.pages.dev/",
