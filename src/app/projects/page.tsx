@@ -17,15 +17,6 @@ const projects = [
     screenshot: "/assets/projects/crewboard.png"
   },
   {
-    title: "GameShelf",
-    description:
-      "A full-stack gaming community platform — Goodreads for video games. Track your personal game library across five statuses, write half-star reviews with spoiler toggles, browse forum threads with nested replies, and follow other gamers for a personalised activity feed.",
-    tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Zod", "RAWG API", "Cloudinary", "Tailwind CSS"],
-    githubUrl: "https://github.com/seanleken/gameshelf",
-    liveUrl: "https://gameshelf-gamma.vercel.app",
-    screenshot: "/assets/projects/gameshelf.png"
-  },
-  {
     title: "Kumo no Chaya",
     description:
       "Static brochure site for a fourth-generation mountain teahouse in Yoshino, Nara. Four pages — home, tea menu, the journey, and about — with the menu driven by a JSON data file. Built with Eleventy and Nunjucks, no images, no framework, no runtime.",
@@ -57,8 +48,8 @@ const projects = [
     description:
       "Static brochure site for a fictional boutique natural wine bar in Marseille, France. Single-page layout with sections for the wine philosophy, pours, story, and location — styled with a warm editorial palette of terracotta, ochre, and cream. Built with Astro and Tailwind CSS, with a small vanilla JS layer for scroll reveals and the mobile menu.",
     tags: ["Astro", "Tailwind CSS", "JavaScript"],
-    githubUrl: "https://github.com/seanleken/trouvaille",
-    liveUrl: "https://trouvaille.pages.dev/",
+    githubUrl: "https://github.com/seanleken/trouvaille-static",
+    liveUrl: "https://trouvaille-static.pages.dev/",
     screenshot: "/assets/projects/trouvaille.png"
   },
 ];
