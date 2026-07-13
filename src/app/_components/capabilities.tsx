@@ -9,7 +9,7 @@ const groups = [
   },
   {
     label: "data",
-    tags: ["PostgreSQL", "Firestore", "Migrations"],
+    tags: ["PostgreSQL", "Firestore", "ETL"],
   },
   {
     label: "tooling & dx",
