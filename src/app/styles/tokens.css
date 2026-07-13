@@ -1,0 +1,33 @@
+/* Design tokens — Light IDE
+   Source of truth: design/redesign-brief.md §3. Ported from design/index.html
+   and design/blog-post.html. One accent only — swap --accent to recolor. */
+:root {
+  --paper: #fbfbfd;
+  --surface: #ffffff;
+  --surface-2: #f5f6fa;
+  --ink: #1e2233;
+  --read: #30354a;
+  --body: #4a5069;
+  --muted: #8a90a6;
+  --line: #eaebf0;
+  --line-2: #f1f2f7;
+  --accent: #7c3aed;
+  --accent-soft: #f3edfe;
+
+  --sx-key: #7c3aed;
+  --sx-type: #b45309;
+  --sx-str: #0a7e4e;
+  --sx-num: #c2410c;
+  --sx-fn: #2563eb;
+  --sx-comment: #8a90a6;
+  --sx-punct: #64748b;
+
+  --less: #b45309;
+  --less-soft: #fbf3e6;
+  --more: #0a7e4e;
+  --more-soft: #e9f6ef;
+
+  --sans: var(--font-sans), system-ui, sans-serif;
+  --mono: var(--font-mono), ui-monospace, monospace;
+  --maxw: 1120px;
+}

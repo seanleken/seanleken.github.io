@@ -1,0 +1,50 @@
+/* Writing cards — landing preview (writing-preview.tsx) and /writing index. */
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.post {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 22px 24px;
+  transition: border-color 0.15s;
+}
+.post:hover {
+  border-color: var(--accent);
+}
+.post-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.post-meta b {
+  color: var(--accent);
+  font-weight: 500;
+}
+.post h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.post p {
+  font-size: 15px;
+  color: var(--body);
+  margin: 0 0 14px;
+}
+.post .read {
+  font-family: var(--mono);
+  font-size: 12.5px;
+}
+.view-all {
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}

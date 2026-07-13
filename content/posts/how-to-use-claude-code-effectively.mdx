@@ -1,0 +1,107 @@
+---
+title: "How to use Claude Code effectively as a developer"
+date: "2026-03-24"
+tags: ["ai", "workflow"]
+excerpt: "Practical strategies for getting the most out of AI-assisted development — from project setup to complex refactors."
+cover: "/assets/blog/how-to-use-claude-code-effectively/cover.jpg"
+---
+
+<Lead id="intro">
+Claude Code has changed how I approach software development. Using it daily across several personal and professional projects, I've built a set of habits that make the collaboration significantly more effective.
+</Lead>
+
+This post covers the practical strategies I've found most useful.
+
+## Invest in a good CLAUDE.md
+
+The single highest-leverage thing you can do is write a `CLAUDE.md` file at your project root. Claude Code reads it at the start of every session, so it's your way of providing persistent context without repeating yourself.
+
+A good `CLAUDE.md` should cover:
+
+- **Commands** — how to run, build, and test the project
+- **Architecture** — the tech stack and key directories
+- **Conventions** — naming patterns, import aliases, styling approach
+- **What to avoid** — things Claude shouldn't change without asking
+
+```md title="CLAUDE.md"
+## Commands
+npm run dev      # start dev server
+npm run build    # production build
+
+## Conventions
+- Use @/* path alias, never relative imports
+- All components are TypeScript strict mode
+- Dark mode via Tailwind `dark:` variant
+```
+
+The more specific, the better. Vague guidance gets vague results.
+
+## Be explicit about scope
+
+Claude Code does exactly what you ask — which means unclear requests produce sprawling changes. The more precisely you define the task, the cleaner the output.
+
+<Compare
+  less="Improve the blog page"
+  more="Add a reading-time estimate to each blog card. Calculate it from the excerpt word count. Match the existing date-formatter style."
+/>
+
+Specificity also prevents over-engineering. If you just want a bug fixed, say so — Claude won't then refactor everything around it.
+
+## Read before you edit
+
+Before asking Claude to modify a component, make sure it has read the relevant files first. Claude Code reads files on demand, so if you jump straight to *"change X"*, it may not have enough context about how X fits into the broader system.
+
+A useful habit: start sessions on unfamiliar parts of the codebase with an exploration prompt before any edit request.
+
+<Prompt label="exploration prompt">
+Read <span className="path">src/app/_components/hero.tsx</span> and <span className="path">src/app/page.tsx</span>, then tell me how the Hero component is used.
+</Prompt>
+
+This surfaces assumptions early and prevents changes that technically work in isolation but break something upstream.
+
+## Use it for the tasks you'd otherwise avoid
+
+The biggest productivity gain comes from tasks you keep deprioritising because they feel tedious:
+
+- Writing TypeScript types for an API response you've been using loosely typed
+- Adding metadata and Open Graph tags to every page
+- Extracting a magic number into a named constant across twenty files
+- Writing a seed script for local development
+
+These tasks are high-value but low-excitement. Claude handles them well, and getting them done removes friction for everything that comes after.
+
+## Review diffs, not just output
+
+It's tempting to accept changes because the result *looks* right. But the diff is where the real information is. Scan every change — not to distrust Claude, but because:
+
+- You'll catch unintended side effects — a removed prop, a changed default value
+- You'll understand your own codebase better
+- You'll spot when Claude has made an assumption that doesn't match your intent
+
+This matters most for refactors touching multiple files. The overall direction may be right while a specific change is subtly wrong.
+
+## Iterate in small steps
+
+Chaining complex instructions in a single prompt tends to produce worse results than breaking the work into steps. Each step gives you a checkpoint to verify before moving on.
+
+For example, when building the projects page on this portfolio:
+
+- **First** — fetch the GitHub repos and understand the content
+- **Then** — explore the existing component patterns to match the style
+- **Then** — create the card component
+- **Then** — create the page using that component
+- **Finally** — wire up the navigation link
+
+Doing this all in one shot would have produced something functional but probably misaligned with the existing design system. Staged steps produce tighter results.
+
+## Give feedback freely
+
+If Claude does something you don't like — a pattern you disagree with, a response style that doesn't fit — say so directly. It adjusts within the session and, if you tell it to remember, across sessions.
+
+The model is not precious about its choices. *"Don't do X, do Y instead"* is more useful than silently undoing the change and hoping the next attempt is different.
+
+## Conclusion
+
+Claude Code works best as a skilled collaborator. Give it real context, be precise about what you want, review what it produces, and build on each step deliberately.
+
+The aim is to spend more time on decisions that require your judgement, and less on the mechanical work surrounding them.

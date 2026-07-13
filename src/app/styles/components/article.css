@@ -1,0 +1,392 @@
+/* Blog post — /writing/[slug]. Reading progress bar, article header, the
+   article+TOC layout grid, prose typography, code-block chrome (targets
+   rehype-pretty-code's real output), and the Prompt/Compare MDX callouts. */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--accent);
+  z-index: 60;
+  transition: width 0.05s linear;
+}
+
+.shell {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.article-head {
+  padding: 52px 0 8px;
+  max-width: 720px;
+}
+.back {
+  font-family: var(--mono);
+  font-size: 13px;
+  display: inline-block;
+  margin-bottom: 26px;
+}
+.meta {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+.meta b {
+  color: var(--accent);
+  font-weight: 500;
+}
+.article-head h1 {
+  font-size: 43px;
+  letter-spacing: -0.03em;
+  margin-bottom: 22px;
+  line-height: 1.06;
+}
+.byline {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--body);
+}
+.byline .av {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+  display: block;
+}
+.cover {
+  height: 320px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin: 32px 0 8px;
+  overflow: hidden;
+  position: relative;
+}
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 720px) 200px;
+  gap: 64px;
+  padding: 40px 0 20px;
+  align-items: start;
+}
+.article {
+  min-width: 0;
+  font-size: 18px;
+  line-height: 1.72;
+  color: var(--read);
+}
+
+.toc {
+  position: sticky;
+  top: 96px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.5;
+}
+.toc .lbl {
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 10.5px;
+  margin-bottom: 14px;
+  padding-left: 13px;
+}
+.toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--line);
+}
+.toc li a {
+  display: block;
+  color: var(--body);
+  padding: 6px 0 6px 13px;
+  margin-left: -1px;
+  border-left: 1px solid transparent;
+  transition:
+    color 0.12s,
+    border-color 0.12s;
+}
+.toc li a:hover {
+  color: var(--accent);
+}
+.toc li a.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+
+.article {
+  counter-reset: section;
+}
+.article p {
+  margin: 0 0 20px;
+  color: var(--read);
+}
+.article .lead {
+  font-size: 21px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 24px;
+}
+.article .sec-h {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 44px 0 18px;
+  scroll-margin-top: 90px;
+  counter-increment: section;
+}
+.article .sec-h .num {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+  flex: none;
+}
+.article .sec-h .num::before {
+  content: counter(section, decimal-leading-zero);
+}
+.article .sec-h h2 {
+  font-size: 26px;
+}
+.article h2.plain {
+  font-size: 26px;
+  margin: 44px 0 18px;
+  scroll-margin-top: 90px;
+}
+.article ul {
+  margin: 0 0 20px;
+  padding-left: 0;
+  list-style: none;
+}
+.article ul li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 9px;
+  color: var(--read);
+}
+.article ul li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+.article ul li b {
+  color: var(--ink);
+  font-weight: 600;
+}
+/* Inline code: any <code> whose parent isn't <pre> — i.e. not a fenced code
+   block, which rehype-pretty-code always wraps in <pre>. No class needed on
+   the MDX side, so plain markdown `code` spans are styled automatically. */
+.article :not(pre) > code,
+.ic {
+  font-family: var(--mono);
+  font-size: 0.87em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 1px 6px;
+  color: var(--ink);
+}
+.article em {
+  color: var(--ink);
+  font-style: italic;
+}
+
+/* Code block chrome — targets rehype-pretty-code's actual output */
+.article figure[data-rehype-pretty-code-figure] {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  overflow: hidden;
+  margin: 24px 0;
+  box-shadow: 0 10px 30px -20px rgba(30, 34, 51, 0.3);
+}
+.article figcaption[data-rehype-pretty-code-title] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 12px 9px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+}
+.article figcaption[data-rehype-pretty-code-title]::before {
+  content: attr(data-language);
+  text-transform: uppercase;
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.article figure[data-rehype-pretty-code-figure] pre {
+  margin: 0;
+  padding: 15px 18px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink);
+  overflow-x: auto;
+  background: var(--surface) !important;
+}
+.article figure[data-rehype-pretty-code-figure] code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.cb-wrap {
+  position: relative;
+}
+.cb-wrap .copy {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 4px 9px;
+  cursor: pointer;
+  transition:
+    color 0.12s,
+    border-color 0.12s;
+}
+.cb-wrap .copy:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Prompt callout */
+.prompt {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 9px 9px 0;
+  padding: 13px 16px;
+  margin: 22px 0;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.prompt .tag {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+.prompt .path {
+  color: var(--sx-str);
+}
+
+/* Comparison callout */
+.cmp {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 24px 0;
+}
+.cmp .card {
+  border-radius: 9px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+}
+.cmp .less {
+  background: var(--less-soft);
+  border-color: #f0dfc0;
+  border-left: 3px solid var(--less);
+  border-radius: 0 9px 9px 0;
+}
+.cmp .more {
+  background: var(--more-soft);
+  border-color: #cde9d9;
+  border-left: 3px solid var(--more);
+  border-radius: 0 9px 9px 0;
+}
+.cmp .tag {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cmp .less .tag {
+  color: var(--less);
+}
+.cmp .more .tag {
+  color: var(--more);
+}
+.cmp .ex {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .toc {
+    display: none;
+  }
+}
+@media (max-width: 560px) {
+  .article-head h1 {
+    font-size: 32px;
+  }
+  .cmp {
+    grid-template-columns: 1fr;
+  }
+  .cover {
+    height: 200px;
+  }
+  .article .lead {
+    font-size: 19px;
+  }
+  .article {
+    font-size: 17px;
+  }
+}
+@media (max-width: 520px) {
+  .shell {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
