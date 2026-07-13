@@ -40,7 +40,7 @@
 .portrait {
   position: relative;
   aspect-ratio: 4 / 5;
-  width: 85%;
+  width: 60%;
   margin: 0 auto;
   border: 1px solid var(--line);
   border-radius: 12px;
