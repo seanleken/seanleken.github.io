@@ -3,7 +3,7 @@ import { ProjectCard } from "@/app/_components/project-card";
 
 export const metadata: Metadata = {
   title: "Projects | Sean Pertet",
-  description: "Personal projects built by Sean Pertet — cloud engineer and full-stack developer.",
+  description: "Personal projects built by Sean Pertet — full-stack TypeScript engineer.",
 };
 
 const projects = [
@@ -14,7 +14,7 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Tailwind CSS", "Vercel"],
     githubUrl: "https://github.com/seanleken/crewboard",
     liveUrl: "https://crewboard-eta.vercel.app",
-    screenshot: "/assets/projects/crewboard.png"
+    screenshot: "/assets/projects/crewboard.png",
   },
   {
     title: "Kumo no Chaya",
@@ -23,7 +23,7 @@ const projects = [
     tags: ["Eleventy", "Nunjucks", "Vanilla CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/kumo-no-chaya",
     liveUrl: "https://kumo-no-chaya.pages.dev/",
-    screenshot: "/assets/projects/kumo-no-chaya.png"
+    screenshot: "/assets/projects/kumo-no-chaya.png",
   },
   {
     title: "Frontline Scholars",
@@ -32,7 +32,7 @@ const projects = [
     tags: ["Astro", "Tailwind CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/frontline-scholars",
     liveUrl: "https://frontline-scholars.pages.dev/",
-    screenshot: "/assets/projects/frontline-scholars.png"
+    screenshot: "/assets/projects/frontline-scholars.png",
   },
   {
     title: "Moto",
@@ -41,7 +41,7 @@ const projects = [
     tags: ["Astro", "Tailwind CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/moto",
     liveUrl: "https://moto-947.pages.dev/",
-    screenshot: "/assets/projects/moto.png"
+    screenshot: "/assets/projects/moto.png",
   },
   {
     title: "Trouvaille",
@@ -50,32 +50,25 @@ const projects = [
     tags: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/trouvaille-static",
     liveUrl: "https://trouvaille-static.pages.dev/",
-    screenshot: "/assets/projects/trouvaille.png"
+    screenshot: "/assets/projects/trouvaille.png",
   },
 ];
 
 export default function ProjectsPage() {
   return (
-    <main className="pt-16">
-      <section className="py-12 md:py-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-          <div className="mb-12">
-            <h1 className="text-4xl font-bold text-portfolio-navy dark:text-white mb-4">
-              Projects
-            </h1>
-            <p className="text-portfolio-slate dark:text-portfolio-light-slate max-w-xl">
-              Personal projects built outside of work — full-stack applications exploring different
-              problem domains.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {projects.map((project, i) => (
-              <ProjectCard key={project.title} project={project} index={i} />
-            ))}
-          </div>
+    <main>
+      <div className="wrap sec-pad">
+        <div className="sec-head">
+          <span className="eyebrow">// projects</span>
+          <h2>Things I&apos;ve built</h2>
         </div>
-      </section>
+
+        <div className="proj-list">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
+          ))}
+        </div>
+      </div>
     </main>
   );
 }

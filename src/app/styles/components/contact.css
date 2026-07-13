@@ -1,0 +1,34 @@
+/* Contact section (src/app/_components/contact.tsx) */
+.contact .sec-pad {
+  padding-bottom: 40px;
+}
+.contact h2 {
+  font-size: 32px;
+}
+.contact .intro {
+  max-width: 52ch;
+  font-size: 17px;
+  margin: 12px 0 34px;
+  color: var(--body);
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+}
+.contact-grid .lbl {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 7px;
+}
+.contact-grid a,
+.contact-grid .val {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--ink);
+}

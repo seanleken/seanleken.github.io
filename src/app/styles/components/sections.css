@@ -1,0 +1,33 @@
+/* Shared section shell — hairline dividers + heading pattern used by every
+   landing section (capabilities, selected work, experience, writing, contact). */
+section {
+  border-top: 1px solid var(--line);
+}
+/* Longhand on purpose: .sec-pad is always combined with .wrap on the same
+   element (class="wrap sec-pad"), and a shorthand `padding: 64px 0` would
+   reset .wrap's left/right padding back to 0, wiping out its horizontal
+   gutter entirely — invisible on wide desktop viewports (where .wrap's
+   max-width + auto margins still center the block) but a real full-bleed
+   bug on mobile, where the viewport is narrower than max-width. */
+.sec-pad {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+.sec-head {
+  margin-bottom: 34px;
+}
+.sec-head .eyebrow {
+  display: block;
+  margin-bottom: 8px;
+}
+.sec-head h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+.sec-head .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}

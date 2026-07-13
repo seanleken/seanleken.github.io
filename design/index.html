@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean Pertet — Senior Full-Stack Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBFBFD;
+    --surface:#FFFFFF;
+    --surface-2:#F5F6FA;
+    --ink:#1E2233;
+    --body:#4A5069;
+    --muted:#8A90A6;
+    --line:#EAEBF0;
+    --line-2:#F1F2F7;
+    --accent:#7C3AED;
+    --accent-soft:#F3EDFE;
+    --sx-key:#7C3AED;
+    --sx-type:#B45309;
+    --sx-str:#0A7E4E;
+    --sx-num:#C2410C;
+    --sx-fn:#2563EB;
+    --sx-comment:#8A90A6;
+    --sx-punct:#64748B;
+    --sans:'Hanken Grotesk',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{color:#6D28D9;}
+  h1,h2,h3{font-family:var(--sans);color:var(--ink);margin:0;line-height:1.08;letter-spacing:-0.025em;font-weight:700;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  .mono{font-family:var(--mono);}
+  .eyebrow{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:0.02em;}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;}
+
+  .nav{position:sticky;top:0;z-index:50;background:rgba(251,251,253,0.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:var(--maxw);margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--ink);font-size:16px;letter-spacing:-0.02em;}
+  .brand .ts{width:22px;height:22px;border-radius:5px;background:var(--accent);color:#fff;font-family:var(--mono);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .nav-links{display:flex;gap:22px;font-family:var(--mono);font-size:13px;}
+  .nav-links a{color:var(--body);}
+  .nav-links a:hover{color:var(--accent);}
+  .cmdk{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-family:var(--mono);font-size:12px;color:var(--muted);cursor:pointer;}
+  .cmdk kbd{background:var(--surface-2);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:11px;color:var(--body);}
+  .cmdk:hover{border-color:var(--accent);color:var(--body);}
+  .nav-toggle{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-family:var(--mono);font-size:13px;color:var(--ink);cursor:pointer;}
+
+  .hero{padding:80px 0 64px;}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  .avatar{width:44px;height:44px;border-radius:10px;background:var(--surface-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:20px;}
+  .hero h1{font-size:50px;font-weight:700;color:var(--ink);margin:14px 0 22px;letter-spacing:-0.03em;}
+  .hero h1 span{color:var(--accent);}
+  .lede{font-size:18px;color:var(--body);max-width:42ch;margin:0 0 30px;}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;}
+  .btn{font-family:var(--mono);font-size:13px;padding:11px 18px;border-radius:8px;border:1px solid var(--line);color:var(--ink);background:var(--surface);transition:background .15s,border-color .15s,color .15s;}
+  .btn:hover{border-color:var(--ink);}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{background:#6D28D9;border-color:#6D28D9;color:#fff;}
+  .locus{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:0.02em;}
+
+  .editor{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 12px 40px -18px rgba(30,34,51,0.28);}
+  .editor-tabs{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface-2);}
+  .dots{display:flex;gap:6px;}
+  .dots i{width:11px;height:11px;border-radius:50%;background:#D7DAE3;display:block;}
+  .tab{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 9px;margin-left:6px;}
+  .tab .tsq{width:15px;height:15px;border-radius:3px;background:var(--accent);color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;font-weight:500;}
+  .code{display:flex;font-family:var(--mono);font-size:13.5px;line-height:1.85;padding:16px 0;}
+  .gutter{padding:0 14px 0 18px;color:#C3C7D4;text-align:right;user-select:none;}
+  .code pre{margin:0;padding:0 20px 0 0;color:var(--ink);overflow-x:auto;white-space:pre;}
+  .k{color:var(--sx-key);}
+  .ty{color:var(--sx-type);}
+  .s{color:var(--sx-str);}
+  .n{color:var(--sx-num);}
+  .fn{color:var(--sx-fn);}
+  .cm{color:var(--sx-comment);font-style:italic;}
+  .p{color:var(--sx-punct);}
+  .editor-status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--surface-2);}
+  .ok{color:var(--sx-str);display:flex;align-items:center;gap:6px;}
+  .ok::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--sx-str);}
+
+  section{border-top:1px solid var(--line);}
+  .sec-pad{padding:64px 0;}
+  .sec-head{margin-bottom:34px;}
+  .sec-head .eyebrow{display:block;margin-bottom:8px;}
+  .sec-head h2{font-size:28px;font-weight:700;}
+  .sec-head .row{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;}
+
+  .cap-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:30px 44px;}
+  .cap-label{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .cap-label::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--accent);}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{font-family:var(--mono);font-size:12.5px;color:var(--body);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 10px;}
+  .cap-infra{margin-top:30px;font-family:var(--mono);font-size:12.5px;color:var(--muted);}
+  .cap-infra b{color:var(--accent);font-weight:500;}
+
+  .proj-feature{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);margin-bottom:22px;transition:border-color .15s;}
+  .proj-preview{background:var(--surface-2);min-height:230px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--muted);border-right:1px solid var(--line);}
+  .proj-info{padding:28px 30px;}
+  .proj-badge{font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border-radius:5px;padding:3px 8px;display:inline-block;margin-bottom:14px;}
+  .proj-info h3{font-size:22px;margin-bottom:10px;}
+  .proj-info p{font-size:15.5px;color:var(--body);margin:0 0 16px;}
+  .proj-links{display:flex;gap:18px;margin-top:16px;font-family:var(--mono);font-size:13px;}
+  .proj-row{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .proj-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);display:flex;flex-direction:column;transition:border-color .15s;}
+  .proj-card:hover,.proj-feature:hover{border-color:var(--accent);}
+  .proj-card .preview{height:130px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--muted);border-bottom:1px solid var(--line);}
+  .proj-card .body{padding:20px 22px;}
+  .proj-card h3{font-size:18px;margin-bottom:8px;}
+  .proj-card p{font-size:14.5px;color:var(--body);margin:0 0 14px;}
+
+  .tl{position:relative;padding-left:28px;}
+  .tl::before{content:"";position:absolute;left:4px;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .tl-item{position:relative;padding-bottom:34px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:"";position:absolute;left:-28px;top:5px;width:10px;height:10px;border-radius:2px;background:var(--surface);border:2px solid var(--accent);}
+  .tl-date{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:4px;}
+  .tl-role{font-family:var(--sans);font-size:19px;font-weight:700;color:var(--ink);}
+  .tl-role small{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:400;}
+  .tl-co{font-family:var(--mono);font-size:13px;color:var(--accent);margin:2px 0 9px;}
+  .tl-item p{margin:0;font-size:15.5px;color:var(--body);max-width:64ch;}
+
+  .posts{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .post{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:22px 24px;transition:border-color .15s;}
+  .post:hover{border-color:var(--accent);}
+  .post-meta{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-bottom:10px;}
+  .post-meta b{color:var(--accent);font-weight:500;}
+  .post h3{font-size:19px;margin-bottom:10px;line-height:1.2;}
+  .post p{font-size:15px;color:var(--body);margin:0 0 14px;}
+  .post .read{font-family:var(--mono);font-size:12.5px;}
+  .view-all{font-family:var(--mono);font-size:13px;}
+
+  .contact .sec-pad{padding-bottom:40px;}
+  .contact h2{font-size:32px;}
+  .contact .intro{max-width:52ch;font-size:17px;margin:12px 0 34px;color:var(--body);}
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:24px;border-top:1px solid var(--line);padding-top:26px;}
+  .contact-grid .lbl{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--accent);display:block;margin-bottom:7px;}
+  .contact-grid a,.contact-grid .val{font-family:var(--mono);font-size:14px;color:var(--ink);}
+  .foot{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 40px;display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--muted);flex-wrap:wrap;gap:12px;}
+  .foot a{color:var(--body);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:38px;}
+    .hero h1{font-size:38px;}
+    .proj-feature{grid-template-columns:1fr;}
+    .proj-preview{border-right:none;border-bottom:1px solid var(--line);min-height:170px;}
+    .proj-row,.posts{grid-template-columns:1fr;}
+    .nav-links,.cmdk{display:none;}
+    .nav-toggle{display:block;}
+    .nav-inner{position:relative;}
+    .nav-links.open{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 32px 14px;}
+    .nav-links.open a{padding:10px 0;border-bottom:1px solid var(--line-2);}
+  }
+  @media (max-width:520px){
+    .wrap,.nav-inner{padding-left:20px;padding-right:20px;}
+    .hero h1{font-size:31px;}
+    .hero{padding-top:52px;}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}*{transition:none!important;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="ts">TS</span>Sean Pertet</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">menu</button>
+    <div class="nav-right">
+      <div class="nav-links" id="navlinks">
+        <a href="#work">Work</a>
+        <a href="#projects">Projects</a>
+        <a href="#writing">Writing</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="cmdk" aria-label="Search">Search <kbd>&#8984;K</kbd></button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="avatar">portrait</div>
+        <span class="eyebrow">// senior full-stack engineer &middot; nairobi</span>
+        <h1>I ship <span>type-safe</span> products, end to end.</h1>
+        <p class="lede">Senior full-stack TypeScript engineer with six years building production systems — from React front-ends to Node services and the APIs, data models, and types that connect them.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#projects">View work</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+        <div class="locus">TypeScript &middot; React &middot; Next.js &middot; Node.js &middot; 6 yrs</div>
+      </div>
+
+      <div class="editor">
+        <div class="editor-tabs">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="tab"><span class="tsq">TS</span>who.ts</span>
+        </div>
+        <div class="code">
+          <div class="gutter">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</div>
+<pre><span class="k">type</span> <span class="ty">Engineer</span> <span class="p">= {</span>
+  name<span class="p">:</span> <span class="s">"Sean Pertet"</span>
+  role<span class="p">:</span> <span class="s">"Senior Full-Stack Engineer"</span>
+  stack<span class="p">:</span> <span class="p">[</span><span class="s">"TypeScript"</span><span class="p">,</span> <span class="s">"React"</span><span class="p">,</span> <span class="s">"Node.js"</span><span class="p">]</span>
+  yearsExperience<span class="p">:</span> <span class="n">6</span>
+  shipsToProduction<span class="p">:</span> <span class="k">true</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="fn">sean</span><span class="p">:</span> <span class="ty">Engineer</span> <span class="p">= {</span> <span class="cm">/* ... */</span> <span class="p">}</span></pre>
+        </div>
+        <div class="editor-status">
+          <span>who.ts &middot; TypeScript</span>
+          <span class="ok">tsc — 0 errors</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap sec-pad">
+    <div class="sec-head">
+      <span class="eyebrow">// capabilities</span>
+      <h2>The stack</h2>
+    </div>
+    <div class="cap-grid">
+      <div>
+        <div class="cap-label">frontend</div>
+        <div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Tailwind</span></div>
+      </div>
+      <div>
+        <div class="cap-label">backend</div>
+        <div class="tags"><span class="tag">Node.js</span><span class="tag">tRPC</span><span class="tag">GraphQL</span><span class="tag">REST</span><span class="tag">Prisma</span></div>
+      </div>
+      <div>
+        <div class="cap-label">data</div>
+        <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">SQL</span><span class="tag">Migrations</span></div>
+      </div>
+      <div>
+        <div class="cap-label">tooling &amp; dx</div>
+        <div class="tags"><span class="tag">Turborepo</span><span class="tag">Vite</span><span class="tag">Vitest</span><span class="tag">Playwright</span><span class="tag">CI/CD</span></div>
+      </div>
+    </div>
+    <div class="cap-infra"><b>// infra</b> &nbsp; GCP &middot; Docker &middot; Terraform</div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap sec-pad">
+    <div class="sec-head">
+      <span class="eyebrow">// selected work</span>
+      <h2>Things I've built</h2>
+    </div>
+
+    <div class="proj-feature">
+      <div class="proj-preview">preview &middot; crewboard.app</div>
+      <div class="proj-info">
+        <span class="proj-badge">Featured &middot; full-stack</span>
+        <h3>CrewBoard</h3>
+        <p>A realistic flight-schedule generator for flight-sim pilots. Full-stack Next.js app with typed API routes, Prisma-backed PostgreSQL persistence, and NextAuth — multi-leg schedules built from real route data.</p>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">Prisma</span><span class="tag">PostgreSQL</span><span class="tag">NextAuth</span><span class="tag">Tailwind</span></div>
+        <div class="proj-links"><a href="#">GitHub →</a><a href="#">Live demo →</a></div>
+      </div>
+    </div>
+
+    <div class="proj-row">
+      <div class="proj-card">
+        <div class="preview">preview</div>
+        <div class="body">
+          <h3>Kumo no Chaya</h3>
+          <p>Static brochure site for a mountain teahouse, driven entirely by a JSON data file. Built with Eleventy and Nunjucks — no framework, no runtime.</p>
+          <div class="tags"><span class="tag">Eleventy</span><span class="tag">JavaScript</span><span class="tag">Nunjucks</span></div>
+          <div class="proj-links"><a href="#">GitHub →</a><a href="#">Live demo →</a></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="preview">preview</div>
+        <div class="body">
+          <h3>Moto</h3>
+          <p>Location-aware menu system for a fictional restaurant group — each city renders its own statically generated menu. Built with Astro and Tailwind.</p>
+          <div class="tags"><span class="tag">Astro</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span></div>
+          <div class="proj-links"><a href="#">GitHub →</a><a href="#">Live demo →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap sec-pad">
+    <div class="sec-head">
+      <span class="eyebrow">// experience</span>
+      <h2>Where I've built it</h2>
+    </div>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-date">Jan 2026 — present</div>
+        <div class="tl-role">Software Engineer <small>(contract)</small></div>
+        <div class="tl-co">Above The Fray</div>
+        <p>Build storefronts in TypeScript and modern React; ship reusable, strongly-typed components backed by REST and GraphQL APIs.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jun 2024 — Jul 2025</div>
+        <div class="tl-role">Senior Developer</div>
+        <div class="tl-co">Space48</div>
+        <p>Led architecture and optimization across multiple client projects; redesigned the team's Git branching strategy, cutting deployment regressions; served as primary technical liaison for clients.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Nov 2020 — Jun 2024</div>
+        <div class="tl-role">Developer</div>
+        <div class="tl-co">Space48</div>
+        <p>Built backend services and integrations in Node.js and TypeScript; led replatforming migrations for products, orders, and customer data; mentored junior developers on best practices.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Sep 2019 — Nov 2020</div>
+        <div class="tl-role">Graduate Developer</div>
+        <div class="tl-co">Space48</div>
+        <p>Developed integrations and automated order, inventory, and shipment synchronization across commerce platforms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="wrap sec-pad">
+    <div class="sec-head">
+      <div class="row">
+        <div>
+          <span class="eyebrow" style="display:block;margin-bottom:8px;">// writing</span>
+          <h2>Latest articles</h2>
+        </div>
+        <a class="view-all" href="#">View all →</a>
+      </div>
+    </div>
+    <div class="posts">
+      <article class="post">
+        <div class="post-meta"><b>2026.03.24</b> &middot; 7 min read &middot; ai / workflow</div>
+        <h3>How to use Claude Code effectively as a developer</h3>
+        <p>Practical strategies for getting the most out of AI-assisted development — from project setup to complex refactors.</p>
+        <a class="read" href="#">Read →</a>
+      </article>
+      <article class="post">
+        <div class="post-meta"><b>2026.02.01</b> &middot; 6 min read &middot; architecture</div>
+        <h3>Building scalable infrastructure that stays type-safe</h3>
+        <p>Lessons from architecting event-driven systems that keep their contracts honest from the database to the client.</p>
+        <a class="read" href="#">Read →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap sec-pad">
+    <span class="eyebrow" style="display:block;margin-bottom:10px;">// contact</span>
+    <h2>Let's build something worth shipping.</h2>
+    <p class="intro">Open to senior full-stack roles and interesting contract work. If you're building something in TypeScript and care about doing it well, get in touch.</p>
+    <div class="contact-grid">
+      <div>
+        <span class="lbl">email</span>
+        <a href="mailto:seanleken43@gmail.com">seanleken43@gmail.com</a>
+      </div>
+      <div>
+        <span class="lbl">phone</span>
+        <a href="tel:+254740796674">+254 740 796 674</a>
+      </div>
+      <div>
+        <span class="lbl">location</span>
+        <span class="val">Nairobi, Kenya</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span>© 2026 Sean Pertet</span>
+      <span><a href="#work">Work</a> &nbsp;&middot;&nbsp; <a href="#writing">Writing</a> &nbsp;&middot;&nbsp; <a href="#contact">Contact</a></span>
+    </div>
+  </div>
+</section>
+
+<script>
+  var toggle = document.querySelector('.nav-toggle');
+  var links = document.getElementById('navlinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){ links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+  });
+</script>
+
+</body>
+</html>

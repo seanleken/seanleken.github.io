@@ -2,39 +2,44 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import cn from "classnames";
 
 const navLinks = [
-  { href: "/", label: "Home" },
+  { href: "/#work", label: "Work" },
   { href: "/projects", label: "Projects" },
-  { href: "/blog", label: "Blog" },
-  { href: "#contact", label: "Contact" },
+  { href: "/writing", label: "Writing" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-portfolio-navy/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-16">
-          <Link
-            href="/"
-            className="text-xl font-bold text-portfolio-navy dark:text-white"
+    <nav className="nav">
+      <div className="nav-inner">
+        <Link href="/" className="brand">
+          <span className="ts">TS</span>Sean Pertet
+        </Link>
+        <div className="nav-right">
+          <button
+            className="nav-toggle"
+            aria-expanded={open}
+            aria-controls="navlinks"
+            onClick={() => setOpen((v) => !v)}
           >
-            SP
-          </Link>
-          <div className="flex items-center gap-8">
+            menu
+          </button>
+          <div className={cn("nav-links", { open })} id="navlinks">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={cn(
-                  "text-sm font-medium transition-colors duration-200",
-                  pathname === link.href
-                    ? "text-portfolio-blue"
-                    : "text-portfolio-slate dark:text-portfolio-light-slate hover:text-portfolio-blue"
-                )}
+                className={cn({
+                  here: !link.href.includes("#") && pathname.startsWith(link.href),
+                })}
+                onClick={() => setOpen(false)}
               >
                 {link.label}
               </Link>

@@ -1,3 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Light IDE design system. tokens.css defines the custom properties everything
+   else reads; layout/ is shared chrome (base reset, nav, footer); components/
+   is every section/page-level component. See each folder's index.css. */
+@import "./styles/tokens.css";
+@import "./styles/layout/index.css";
+@import "./styles/components/index.css";

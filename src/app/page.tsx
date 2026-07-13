@@ -1,26 +1,20 @@
 import { Hero } from "@/app/_components/hero";
-import { EnterpriseExperience } from "@/app/_components/enterprise-experience";
-import { TechStack } from "@/app/_components/tech-stack";
+import { Capabilities } from "@/app/_components/capabilities";
+import { SelectedWork } from "@/app/_components/selected-work";
 import { Timeline } from "@/app/_components/timeline";
-import { BlogPreview } from "@/app/_components/blog-preview";
+import { WritingPreview } from "@/app/_components/writing-preview";
 import { Contact } from "@/app/_components/contact";
-import { SectionSeparator } from "@/app/_components/section-separator";
-import { getAllPosts } from "@/lib/api";
+import { getAllPosts } from "@/lib/posts";
 
 export default function Home() {
   const posts = getAllPosts();
 
   return (
-    <main className="pt-16">
+    <main>
       <Hero />
-      <SectionSeparator />
-      <EnterpriseExperience />
-      <SectionSeparator />
-      <TechStack />
-      <SectionSeparator />
+      <Capabilities />
       <Timeline />
-      <SectionSeparator />
-      <BlogPreview posts={posts} />
+      <WritingPreview posts={posts} />
       <Contact />
     </main>
   );

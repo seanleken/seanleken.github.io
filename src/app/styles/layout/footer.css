@@ -1,0 +1,51 @@
+/* Site footer (src/app/_components/footer.tsx) + the blog post's foot-cta strip. */
+footer.foot {
+  border-top: 1px solid var(--line);
+}
+.foot .inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 22px 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.foot a {
+  color: var(--body);
+}
+.foot-cta {
+  border-top: 1px solid var(--line);
+  margin-top: 48px;
+}
+.foot-cta .inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 32px;
+}
+.foot-cta h3 {
+  font-size: 23px;
+  margin-bottom: 10px;
+}
+.foot-cta p {
+  color: var(--body);
+  font-size: 16px;
+  margin: 0 0 18px;
+}
+.foot-cta .btn {
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  display: inline-block;
+}
+.foot-cta .btn:hover {
+  background: #6d28d9;
+  color: #fff;
+}
