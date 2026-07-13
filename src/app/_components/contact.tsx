@@ -1,4 +1,9 @@
-import { CONTACT_EMAIL, CONTACT_PHONE, CONTACT_LOCATION } from "@/lib/constants";
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_LOCATION,
+  CONTACT_LINKEDIN_URL,
+} from "@/lib/constants";
 
 export function Contact() {
   return (
@@ -23,6 +28,12 @@ export function Contact() {
           <div>
             <span className="lbl">location</span>
             <span className="val">{CONTACT_LOCATION}</span>
+          </div>
+          <div>
+            <span className="lbl">linkedin</span>
+            <a href={CONTACT_LINKEDIN_URL} target="_blank" rel="noreferrer">
+              linkedin.com/in/sean-pertet
+            </a>
           </div>
         </div>
       </div>
