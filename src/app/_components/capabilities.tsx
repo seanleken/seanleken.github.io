@@ -13,7 +13,7 @@ const groups = [
   },
   {
     label: "tooling & dx",
-    tags: ["Turborepo", "Vite", "Vitest", "Playwright", "CI/CD"],
+    tags: ["Makefiles", "Jest", "Webpack", "Vite"],
   },
   {
     label: "infra",
