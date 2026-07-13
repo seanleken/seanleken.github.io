@@ -19,7 +19,7 @@ export function Hero() {
     <header className="hero">
       <div className="wrap hero-grid">
         <motion.div {...fadeUp()}>
-          <span className="eyebrow">// senior full-stack engineer &middot; nairobi</span>
+          <span className="eyebrow">// senior full-stack software engineer &middot; nairobi</span>
           <h1>
             I ship <span>type-safe</span> products, end to end.
           </h1>
