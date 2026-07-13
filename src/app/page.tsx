@@ -1,6 +1,5 @@
 import { Hero } from "@/app/_components/hero";
 import { Capabilities } from "@/app/_components/capabilities";
-import { SelectedWork } from "@/app/_components/selected-work";
 import { Timeline } from "@/app/_components/timeline";
 import { WritingPreview } from "@/app/_components/writing-preview";
 import { Contact } from "@/app/_components/contact";
