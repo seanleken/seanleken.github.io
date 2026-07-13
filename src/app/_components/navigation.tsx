@@ -22,15 +22,15 @@ export function Navigation() {
         <Link href="/" className="brand">
           <span className="ts">TS</span>Sean Pertet
         </Link>
-        <button
-          className="nav-toggle"
-          aria-expanded={open}
-          aria-controls="navlinks"
-          onClick={() => setOpen((v) => !v)}
-        >
-          menu
-        </button>
         <div className="nav-right">
+          <button
+            className="nav-toggle"
+            aria-expanded={open}
+            aria-controls="navlinks"
+            onClick={() => setOpen((v) => !v)}
+          >
+            menu
+          </button>
           <div className={cn("nav-links", { open })} id="navlinks">
             {navLinks.map((link) => (
               <Link

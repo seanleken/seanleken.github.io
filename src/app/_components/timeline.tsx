@@ -74,7 +74,7 @@ export function Timeline() {
       <div className="wrap sec-pad">
         <div className="sec-head">
           <span className="eyebrow">// experience</span>
-          <h2>Where I&apos;ve built it</h2>
+          <h2>Where I&apos;ve built</h2>
         </div>
         <div className="tl">
           {experiences.map((exp, index) => (

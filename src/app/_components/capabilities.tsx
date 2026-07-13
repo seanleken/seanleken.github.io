@@ -15,6 +15,10 @@ const groups = [
     label: "tooling & dx",
     tags: ["Turborepo", "Vite", "Vitest", "Playwright", "CI/CD"],
   },
+  {
+    label: "infra",
+    tags: ["GCP", "Docker", "Terraform"]
+  }
 ];
 
 export function Capabilities() {
@@ -38,9 +42,6 @@ export function Capabilities() {
               </div>
             </div>
           ))}
-        </div>
-        <div className="cap-infra">
-          <b>// infra</b> &nbsp; GCP &middot; Docker &middot; Terraform
         </div>
       </div>
     </section>

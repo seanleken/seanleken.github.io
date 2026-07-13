@@ -13,7 +13,6 @@ export default function Home() {
     <main>
       <Hero />
       <Capabilities />
-      <SelectedWork />
       <Timeline />
       <WritingPreview posts={posts} />
       <Contact />
