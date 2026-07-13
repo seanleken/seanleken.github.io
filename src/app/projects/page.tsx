@@ -14,7 +14,7 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Tailwind CSS", "Vercel"],
     githubUrl: "https://github.com/seanleken/crewboard",
     liveUrl: "https://crewboard-eta.vercel.app",
-    screenshot: "/assets/projects/crewboard.png",
+    screenshot: "/assets/projects/crewboard.jpg",
   },
   {
     title: "Kumo no Chaya",
@@ -23,7 +23,7 @@ const projects = [
     tags: ["Eleventy", "Nunjucks", "Vanilla CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/kumo-no-chaya",
     liveUrl: "https://kumo-no-chaya.pages.dev/",
-    screenshot: "/assets/projects/kumo-no-chaya.png",
+    screenshot: "/assets/projects/kumo-no-chaya.jpg",
   },
   {
     title: "Frontline Scholars",
@@ -32,7 +32,7 @@ const projects = [
     tags: ["Astro", "Tailwind CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/frontline-scholars",
     liveUrl: "https://frontline-scholars.pages.dev/",
-    screenshot: "/assets/projects/frontline-scholars.png",
+    screenshot: "/assets/projects/frontline-scholars.jpg",
   },
   {
     title: "Moto",
@@ -41,7 +41,7 @@ const projects = [
     tags: ["Astro", "Tailwind CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/moto",
     liveUrl: "https://moto-947.pages.dev/",
-    screenshot: "/assets/projects/moto.png",
+    screenshot: "/assets/projects/moto.jpg",
   },
   {
     title: "Trouvaille",
@@ -50,7 +50,7 @@ const projects = [
     tags: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/seanleken/trouvaille-static",
     liveUrl: "https://trouvaille-static.pages.dev/",
-    screenshot: "/assets/projects/trouvaille.png",
+    screenshot: "/assets/projects/trouvaille.jpg",
   },
 ];
 
