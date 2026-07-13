@@ -8,7 +8,7 @@ const secondary = [
     tags: ["Eleventy", "JavaScript", "Nunjucks"],
     githubUrl: "https://github.com/seanleken/kumo-no-chaya",
     liveUrl: "https://kumo-no-chaya.pages.dev/",
-    screenshot: "/assets/projects/kumo-no-chaya.png",
+    screenshot: "/assets/projects/kumo-no-chaya.jpg",
   },
   {
     title: "Moto",
@@ -17,7 +17,7 @@ const secondary = [
     tags: ["Astro", "Tailwind", "JavaScript"],
     githubUrl: "https://github.com/seanleken/moto",
     liveUrl: "https://moto-947.pages.dev/",
-    screenshot: "/assets/projects/moto.png",
+    screenshot: "/assets/projects/moto.jpg",
   },
 ];
 
@@ -33,7 +33,7 @@ export function SelectedWork() {
         <div className="proj-feature">
           <div className="proj-preview">
             <Image
-              src="/assets/projects/crewboard.png"
+              src="/assets/projects/crewboard.jpg"
               alt="CrewBoard screenshot"
               fill
               sizes="(max-width: 860px) 100vw, 50vw"
