@@ -46,7 +46,7 @@ export function Hero() {
             src="/assets/headshot.jpg"
             alt="Sean Pertet"
             fill
-            sizes="(max-width: 860px) 100vw, 50vw"
+            sizes="(max-width: 860px) 85vw, 42vw"
             priority
           />
         </motion.div>
