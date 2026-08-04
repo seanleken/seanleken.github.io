@@ -1,10 +1,12 @@
-# seanpertet.dev
+# seanleken.github.io
 
 Sean Pertet's personal portfolio — a Next.js site built around a "Light IDE"
 design system: a light, code-forward aesthetic with a single violet accent,
 monospace for anything structural, and no dark mode. Positions Sean as a senior
 full-stack TypeScript engineer, with cloud/e-commerce experience as background
 context rather than the headline.
+
+Statically exported (`output: "export"`) and deployed to GitHub Pages.
 
 ## Stack
 
@@ -24,8 +26,8 @@ npm run dev      # http://localhost:3000, Turbopack
 ```
 
 ```bash
-npm run build    # production build
-npm start        # serve the production build
+npm run build    # static export to out/
+npm run preview  # serve out/ locally to sanity-check the export
 ```
 
 ## Project structure
@@ -86,5 +88,11 @@ recurring CSS gotcha worth knowing before touching `styles/`).
 
 ## Deployment
 
-Deployed on [Vercel](https://vercel.com). Pushing to the default branch
-triggers a build; no environment variables are required.
+Deployed to GitHub Pages via `.github/workflows/deploy.yml`: pushing to `main`
+runs `npm run build` (static export to `out/`) and publishes it with
+`actions/deploy-pages`. No environment variables are required.
+
+`next.config.ts` sets `output: "export"` and `images.unoptimized: true` — there's
+no server at request time, so `next/image` serves files at their original size
+instead of transforming them on demand. Keep source images sized close to their
+real display size (see the Images note in `CLAUDE.md`).

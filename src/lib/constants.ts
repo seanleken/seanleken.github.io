@@ -1,4 +1,4 @@
-export const SITE_URL = "https://seanpertet.dev";
+export const SITE_URL = "https://seanleken.github.io";
 export const SITE_NAME = "Sean Pertet";
 export const SITE_TITLE = "Sean Pertet | Senior Full-Stack Software Engineer";
 export const SITE_DESCRIPTION =

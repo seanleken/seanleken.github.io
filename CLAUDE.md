@@ -13,9 +13,19 @@ Reference docs from the redesign are still in `design/` (`redesign-brief.md`,
 
 ```bash
 npm run dev      # Start dev server with Turbopack (http://localhost:3000)
-npm run build    # Build for production
-npm start        # Serve production build
+npm run build    # Static export to out/ (output: "export" in next.config.ts)
+npm run preview  # Serve out/ locally to sanity-check the export
 ```
+
+## Deployment
+
+Statically exported and deployed to GitHub Pages — `.github/workflows/deploy.yml`
+runs `npm run build` and publishes `out/` on every push to `main`. There is no
+server at request time: `next.config.ts` sets `output: "export"` and
+`images.unoptimized: true`, so anything that needs a live server (route
+handlers, middleware, `cookies()`/`headers()`, ISR/`revalidate`) is off the
+table. `public/.nojekyll` must stay — without it GitHub Pages' Jekyll
+processing silently drops the `_next/` directory (leading underscore).
 
 ## Architecture
 
@@ -23,9 +33,9 @@ npm start        # Serve production build
 - **Language:** TypeScript (strict mode)
 - **Styling:** hand-authored CSS, no Tailwind (removed deliberately — see below)
 - **Animation:** Framer Motion, gated behind `useReducedMotion()`
-- **Blog:** MDX files in `/content/posts`, compiled at request time via
-  `next-mdx-remote/rsc` + `rehype-slug` + `rehype-pretty-code` (Shiki,
-  `github-light` theme)
+- **Blog:** MDX files in `/content/posts`, compiled at build time (via static
+  export's `generateStaticParams`) using `next-mdx-remote/rsc` +
+  `rehype-slug` + `rehype-pretty-code` (Shiki, `github-light` theme)
 
 ## Project Structure
 
@@ -117,11 +127,13 @@ public/assets/               # Images — headshot, project screenshots, blog co
   for the pattern.
 
 **Images**
-- Keep source assets close to their real display size. Oversized sources slow
-  down `next/image`'s on-demand optimization — most visible as first-load
-  latency on Vercel (the image optimization API transforms + caches per unique
-  size on first request; bigger sources mean a slower cold-cache transform).
-  Prefer JPEG over PNG for photos/screenshots unless transparency is needed.
+- `images.unoptimized: true` (required for static export — there's no server
+  to run Next's Image Optimization API on GitHub Pages), so `next/image` no
+  longer resizes/transforms anything at request time — whatever ships in
+  `public/assets/` is exactly what browsers download. Keep source assets close
+  to their real display size and prefer JPEG over PNG for photos/screenshots
+  unless transparency is needed; there's no server-side optimizer left to
+  paper over an oversized source.
 
 ## Site Identity
 
