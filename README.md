@@ -1,33 +1,36 @@
-# portfolio-astro
+# seanleken.github.io
 
-Sean Pertet's personal portfolio — an Astro rebuild of
-[seanleken.github.io](https://seanleken.github.io), built around a "Light IDE"
-design system: a light, code-forward aesthetic with a single violet accent,
-monospace for anything structural, and no dark mode.
+Personal portfolio and blog for Sean Pertet, a senior full-stack TypeScript
+engineer based in Nairobi. Static site built with Astro and served from GitHub
+Pages at **[seanleken.github.io](https://seanleken.github.io)**.
 
-Replaces a Next.js App Router version. React and Framer Motion are gone; the
-site ships no framework JavaScript. See [`PLAN.md`](./PLAN.md) for the migration
-scope, the decisions behind it, and what was verified.
+The design is a light, code-forward system: one violet accent, monospace for
+anything structural (labels, dates, tags, filenames), sentence case throughout,
+and no dark mode.
 
 ## Stack
 
-- **Framework:** Astro 7, static output
-- **Language:** TypeScript (strict)
-- **Styling:** hand-authored CSS — no Tailwind. Design tokens plus one file per
-  component/section under `src/styles/`
-- **Fonts:** Hanken Grotesk + JetBrains Mono, self-hosted via `@fontsource-variable`
-- **Animation:** CSS transitions and one shared IntersectionObserver
-- **Blog:** MDX via Content Collections, syntax highlighting through
-  `rehype-pretty-code` + Shiki (`github-light`)
+- **Astro**, static output
+- **TypeScript**, strict
+- **Hand-authored CSS** — design tokens plus one file per component or section.
+  No Tailwind.
+- **Hanken Grotesk** and **JetBrains Mono**, self-hosted via `@fontsource`
+- **MDX** blog through content collections, with syntax highlighting from
+  `rehype-pretty-code` and Shiki
+
+No client-side framework. Pages render to HTML at build time; four small scripts
+handle the mobile nav, table of contents, reading progress, and the code-block
+copy buttons. Images are resized and converted to WebP during the build.
 
 ## Getting started
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
+npm run dev
 ```
 
-Or, without tying up the terminal:
+The dev server runs at <http://localhost:4321>. To run it without tying up the
+terminal:
 
 ```bash
 npx astro dev --background
@@ -35,21 +38,40 @@ npx astro dev logs -f
 npx astro dev stop
 ```
 
-```bash
-npm run build    # static build to dist/
-npm run preview  # serve dist/ locally
+| Command | Does |
+| --- | --- |
+| `npm run dev` | Dev server with hot reload |
+| `npm run build` | Static build into `dist/` |
+| `npm run preview` | Serve `dist/` locally |
+| `npm run og` | Regenerate the social preview image |
+
+## Project structure
+
+```
+src/
+  layouts/Base.astro     # <head> metadata, nav, footer
+  pages/                  # One file per route
+  components/              # Section components; mdx/ holds MDX-only ones
+  styles/                   # tokens.css, then layout/ and components/
+  content/posts/             # Blog posts (MDX)
+  assets/                     # Images optimised at build time
+  consts.ts                    # Site metadata and contact details
+public/                    # Served as-is: favicons, manifest, robots.txt
 ```
 
-## Writing a blog post
+Images that should be optimised go in `src/assets/` and are imported. Only files
+needing a fixed, absolute URL belong in `public/`.
 
-Add a `.mdx` file to `src/content/posts/` with frontmatter:
+## Writing a post
+
+Add an `.mdx` file to `src/content/posts/`:
 
 ```mdx
 ---
 title: "Post title"
 date: "2026-01-01"
 tags: ["tag-one", "tag-two"]
-excerpt: "One or two sentences for the post index and previews."
+excerpt: "One or two sentences for the index and previews."
 cover: "/assets/blog/your-post/cover.jpg"
 ---
 
@@ -59,22 +81,28 @@ Opening paragraph.
 
 ## A section heading
 
-Body copy. `##` headings are numbered automatically — title the last one
-exactly `Conclusion` to get the unnumbered treatment.
+Body copy. `##` headings are numbered automatically — title the last one exactly
+`Conclusion` to get the unnumbered treatment.
 ```
 
-Frontmatter is validated by a zod schema in `src/content.config.ts`, so a typo
-fails the build with a real error rather than rendering blank.
+Frontmatter is validated against a schema in `src/content.config.ts`, so a typo
+fails the build with a real error instead of rendering blank. Reading time and
+the table of contents are generated automatically.
 
 `<Compare less="..." more="..." />` and `<Prompt label="...">...</Prompt>` are
-available for callouts; fenced code blocks support `` ```ts title="file.ts" ``
-for a filename tab. See [`CLAUDE.md`](./CLAUDE.md) for full conventions — and
-for the recurring CSS gotcha worth knowing before touching `src/styles/`.
+available for callouts, and fenced code blocks take a filename tab:
+
+````
+```ts title="example.ts"
+````
+
+See [`CLAUDE.md`](./CLAUDE.md) for the full set of conventions.
 
 ## Deployment
 
-Pushed to `main` → GitHub Actions runs `npm run build` and publishes `dist/`
-to GitHub Pages. No environment variables required.
+Pushing to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml),
+which builds the site and publishes `dist/` to GitHub Pages. No environment
+variables are needed.
 
-`public/.nojekyll` must stay: without it, Pages' Jekyll processing drops the
-`_astro/` directory and the site loads unstyled.
+`public/.nojekyll` must stay. Without it, Pages runs Jekyll, which silently drops
+the `_astro/` directory and the site loads without styles.
