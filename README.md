@@ -1,7 +1,6 @@
 # seanleken.github.io
 
-Personal portfolio and blog for Sean Pertet, a senior full-stack TypeScript
-engineer based in Nairobi. Static site built with Astro and served from GitHub
+My personal portfolio site showcasing my experience work and blogs. Static site built with Astro and served from GitHub
 Pages at **[seanleken.github.io](https://seanleken.github.io)**.
 
 The design is a light, code-forward system: one violet accent, monospace for
