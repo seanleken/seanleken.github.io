@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from "astro:content";
+import { Image, getImage } from "astro:assets";
+import Base from "@/layouts/Base.astro";
+import Toc from "@/components/Toc.astro";
+import ReadingProgress from "@/components/ReadingProgress.astro";
+import Lead from "@/components/mdx/Lead.astro";
+import Compare from "@/components/mdx/Compare.astro";
+import Prompt from "@/components/mdx/Prompt.astro";
+import Pre from "@/components/mdx/Pre.astro";
+import H2 from "@/components/mdx/H2.astro";
+import { toTocHeadings } from "@/lib/headings";
+import { formatDate } from "@/lib/posts";
+import headshot from "@/assets/headshot.jpg";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
+
+const tocHeadings = toTocHeadings(headings);
+const readingTime = remarkPluginFrontmatter.readingTime as string;
+const { title, date, tags, excerpt, cover } = post.data;
+
+const covers = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/blog/**/*.{jpg,jpeg,png,webp}",
+);
+const coverKey = cover ? `/src/assets${cover.replace(/^\/assets/, "")}` : undefined;
+const coverImage = coverKey && covers[coverKey] ? (await covers[coverKey]()).default : undefined;
+
+// The cover lives in src/assets and is content-hashed at build time, so the
+// frontmatter path is not a real URL. Resolve it to the emitted file and hand
+// that to og:image — otherwise every post's link preview 404s. JPEG at 1200x630
+// because some scrapers still won't take WebP.
+const ogImage = coverImage
+  ? (
+      await getImage({
+        src: coverImage,
+        width: 1200,
+        height: 630,
+        fit: "cover",
+        format: "jpeg",
+      })
+    ).src
+  : undefined;
+---
+
+<Base title={`${title} | Sean Pertet`} description={excerpt} image={ogImage}>
+  <ReadingProgress />
+  <main>
+    <div class="shell">
+      <div class="article-head">
+        <a class="back" href="/writing">← back to writing</a>
+        <div class="meta">
+          <b>{formatDate(date)}</b> &middot; {readingTime} &middot; {tags.join(" / ")}
+        </div>
+        <h1>{title}</h1>
+        <div class="byline">
+          <Image class="av" src={headshot} alt="Sean Pertet" width={30} height={30} />
+          Sean Pertet &middot; Senior Full-Stack Engineer
+        </div>
+        {
+          coverImage && (
+            <div class="cover">
+              <Image src={coverImage} alt={title} widths={[720, 1080]} sizes="720px" loading="eager" />
+            </div>
+          )
+        }
+      </div>
+
+      <div class="layout">
+        <article class="article">
+          <Content components={{ Lead, Compare, Prompt, pre: Pre, h2: H2 }} />
+        </article>
+        <Toc headings={tocHeadings} />
+      </div>
+    </div>
+
+    <section class="foot-cta">
+      <div class="inner">
+        <h3>Building something in TypeScript?</h3>
+        <p>I&apos;m open to senior full-stack roles and interesting contract work.</p>
+        <a class="btn" href="/#contact">Get in touch →</a>
+      </div>
+    </section>
+  </main>
+</Base>

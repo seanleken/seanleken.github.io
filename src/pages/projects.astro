@@ -1,0 +1,23 @@
+---
+import Base from "@/layouts/Base.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import { projects } from "@/data/projects";
+---
+
+<Base
+  title="Projects | Sean Pertet"
+  description="Personal projects built by Sean Pertet, full-stack TypeScript engineer."
+>
+  <main>
+    <div class="wrap sec-pad">
+      <div class="sec-head">
+        <span class="eyebrow">// projects</span>
+        <h2>Things I&apos;ve built</h2>
+      </div>
+
+      <div class="proj-list">
+        {projects.map((project, i) => <ProjectCard project={project} index={i} />)}
+      </div>
+    </div>
+  </main>
+</Base>

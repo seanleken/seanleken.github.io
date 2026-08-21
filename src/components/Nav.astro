@@ -1,0 +1,54 @@
+---
+const navLinks = [
+  { href: "/#work", label: "Work" },
+  { href: "/projects", label: "Projects" },
+  { href: "/writing", label: "Writing" },
+  { href: "/#contact", label: "Contact" },
+];
+
+const pathname = Astro.url.pathname;
+---
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="brand"><span class="ts">TS</span>Sean Pertet</a>
+    <div class="nav-right">
+      <button class="nav-toggle" aria-expanded="false" aria-controls="navlinks">menu</button>
+      <div class="nav-links" id="navlinks">
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                { here: !link.href.includes("#") && pathname.startsWith(link.href) },
+              ]}
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle — replaces the useState in the React version.
+  const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
+  const links = document.querySelector<HTMLElement>(".nav-links");
+
+  if (toggle && links) {
+    toggle.addEventListener("click", () => {
+      const open = links.classList.toggle("open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+
+    // Close on navigate, matching the React version's onClick handler.
+    links.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        links.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+      }),
+    );
+  }
+</script>

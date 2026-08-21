@@ -1,0 +1,39 @@
+---
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_LOCATION,
+  CONTACT_LINKEDIN_URL,
+} from "@/consts";
+---
+
+<section id="contact" class="contact">
+  <div class="wrap sec-pad">
+    <span class="eyebrow">// contact</span>
+    <h2>Let&apos;s build something worth shipping.</h2>
+    <p class="intro">
+      Open to senior full-stack roles and interesting contract work. If you&apos;re
+      building something in TypeScript and care about doing it well, get in touch.
+    </p>
+    <div class="contact-grid">
+      <div>
+        <span class="lbl">email</span>
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      </div>
+      <div>
+        <span class="lbl">phone</span>
+        <a href={`tel:${CONTACT_PHONE}`}>{CONTACT_PHONE}</a>
+      </div>
+      <div>
+        <span class="lbl">location</span>
+        <span class="val">{CONTACT_LOCATION}</span>
+      </div>
+      <div>
+        <span class="lbl">linkedin</span>
+        <a href={CONTACT_LINKEDIN_URL} target="_blank" rel="noreferrer">
+          linkedin.com/in/sean-pertet
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

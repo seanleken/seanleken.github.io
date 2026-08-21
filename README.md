@@ -1,66 +1,48 @@
-# seanleken.github.io
+# portfolio-astro
 
-Sean Pertet's personal portfolio — a Next.js site built around a "Light IDE"
+Sean Pertet's personal portfolio — an Astro rebuild of
+[seanleken.github.io](https://seanleken.github.io), built around a "Light IDE"
 design system: a light, code-forward aesthetic with a single violet accent,
-monospace for anything structural, and no dark mode. Positions Sean as a senior
-full-stack TypeScript engineer, with cloud/e-commerce experience as background
-context rather than the headline.
+monospace for anything structural, and no dark mode.
 
-Statically exported (`output: "export"`) and deployed to GitHub Pages.
+Replaces a Next.js App Router version. React and Framer Motion are gone; the
+site ships no framework JavaScript. See [`PLAN.md`](./PLAN.md) for the migration
+scope, the decisions behind it, and what was verified.
 
 ## Stack
 
-- **Framework:** Next.js (App Router), React 19, TypeScript (strict)
-- **Styling:** hand-authored CSS — no Tailwind. Design tokens + one file per
-  component/section under `src/app/styles/`
-- **Animation:** Framer Motion, gated behind `useReducedMotion()`
-- **Blog:** MDX (`content/posts/*.mdx`), compiled at request time with
-  `next-mdx-remote`, syntax highlighting via `rehype-pretty-code` + Shiki
-  (`github-light` theme), heading slugs via `rehype-slug`
+- **Framework:** Astro 7, static output
+- **Language:** TypeScript (strict)
+- **Styling:** hand-authored CSS — no Tailwind. Design tokens plus one file per
+  component/section under `src/styles/`
+- **Fonts:** Hanken Grotesk + JetBrains Mono, self-hosted via `@fontsource-variable`
+- **Animation:** CSS transitions and one shared IntersectionObserver
+- **Blog:** MDX via Content Collections, syntax highlighting through
+  `rehype-pretty-code` + Shiki (`github-light`)
 
 ## Getting started
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000, Turbopack
+npm run dev      # http://localhost:4321
+```
+
+Or, without tying up the terminal:
+
+```bash
+npx astro dev --background
+npx astro dev logs -f
+npx astro dev stop
 ```
 
 ```bash
-npm run build    # static export to out/
-npm run preview  # serve out/ locally to sanity-check the export
-```
-
-## Project structure
-
-```
-src/
-  app/
-    layout.tsx            # Fonts (Hanken Grotesk + JetBrains Mono), nav, footer
-    page.tsx                # Home page
-    globals.css              # Imports tokens.css + styles/layout + styles/components
-    styles/
-      tokens.css              # CSS custom properties — the whole palette, one accent
-      layout/                  # Nav, footer, base reset
-      components/              # One file per section (hero, projects, article, ...)
-    _components/             # React components
-      mdx/                     # MDX component map, code-block copy button, TOC, reading progress
-    projects/page.tsx
-    writing/
-      page.tsx                 # Post index
-      [slug]/page.tsx           # Individual post (MDX → HTML, SSG)
-  lib/
-    posts.ts                 # Reads content/posts/*.mdx — frontmatter + reading time
-    headings.ts                # TOC heading extraction
-    pretty-code.ts              # Shiki/rehype-pretty-code config
-    constants.ts                 # Site metadata, contact info
-content/posts/               # Blog content (MDX)
-public/assets/                # Images
-design/                        # Redesign brief + mockups (reference, not shipped)
+npm run build    # static build to dist/
+npm run preview  # serve dist/ locally
 ```
 
 ## Writing a blog post
 
-Add a `.mdx` file to `content/posts/` with frontmatter:
+Add a `.mdx` file to `src/content/posts/` with frontmatter:
 
 ```mdx
 ---
@@ -81,18 +63,18 @@ Body copy. `##` headings are numbered automatically — title the last one
 exactly `Conclusion` to get the unnumbered treatment.
 ```
 
+Frontmatter is validated by a zod schema in `src/content.config.ts`, so a typo
+fails the build with a real error rather than rendering blank.
+
 `<Compare less="..." more="..." />` and `<Prompt label="...">...</Prompt>` are
 available for callouts; fenced code blocks support `` ```ts title="file.ts" ``
-for a filename tab. See `CLAUDE.md` for the full conventions (and the
-recurring CSS gotcha worth knowing before touching `styles/`).
+for a filename tab. See [`CLAUDE.md`](./CLAUDE.md) for full conventions — and
+for the recurring CSS gotcha worth knowing before touching `src/styles/`.
 
 ## Deployment
 
-Deployed to GitHub Pages via `.github/workflows/deploy.yml`: pushing to `main`
-runs `npm run build` (static export to `out/`) and publishes it with
-`actions/deploy-pages`. No environment variables are required.
+Pushed to `main` → GitHub Actions runs `npm run build` and publishes `dist/`
+to GitHub Pages. No environment variables required.
 
-`next.config.ts` sets `output: "export"` and `images.unoptimized: true` — there's
-no server at request time, so `next/image` serves files at their original size
-instead of transforming them on demand. Keep source images sized close to their
-real display size (see the Images note in `CLAUDE.md`).
+`public/.nojekyll` must stay: without it, Pages' Jekyll processing drops the
+`_astro/` directory and the site loads unstyled.

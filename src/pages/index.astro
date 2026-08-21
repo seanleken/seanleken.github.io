@@ -1,0 +1,21 @@
+---
+import Base from "@/layouts/Base.astro";
+import Hero from "@/components/Hero.astro";
+import Capabilities from "@/components/Capabilities.astro";
+import Timeline from "@/components/Timeline.astro";
+import WritingPreview from "@/components/WritingPreview.astro";
+import Contact from "@/components/Contact.astro";
+import { getSortedPosts } from "@/lib/posts";
+
+const posts = await getSortedPosts();
+---
+
+<Base>
+  <main>
+    <Hero />
+    <Capabilities />
+    <Timeline />
+    <WritingPreview posts={posts} />
+    <Contact />
+  </main>
+</Base>

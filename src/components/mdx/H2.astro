@@ -1,0 +1,23 @@
+---
+// `##` headings render as numbered sections via CSS counters (.sec-h/.num in
+// article.css). "Conclusion" is the one exception — it gets the unnumbered
+// h2.plain treatment, matching the Next version.
+const { id } = Astro.props;
+const text = await Astro.slots.render("default");
+const isConclusion = text.trim() === "Conclusion";
+---
+
+{
+  isConclusion ? (
+    <h2 class="plain" id={id}>
+      <Fragment set:html={text} />
+    </h2>
+  ) : (
+    <div class="sec-h" id={id}>
+      <span class="num" />
+      <h2>
+        <Fragment set:html={text} />
+      </h2>
+    </div>
+  )
+}

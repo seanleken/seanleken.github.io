@@ -1,0 +1,32 @@
+---
+const groups = [
+  { label: "frontend", tags: ["TypeScript", "React", "Next.js", "Tailwind"] },
+  { label: "backend", tags: ["Node.js", "tRPC", "GraphQL", "REST", "Prisma"] },
+  { label: "data", tags: ["PostgreSQL", "Firestore", "ETL"] },
+  { label: "tooling & dx", tags: ["Vite", "Webpack", "Jest"] },
+  { label: "infra", tags: ["GCP", "Docker", "Terraform"] },
+];
+---
+
+<section id="work">
+  <div class="wrap sec-pad">
+    <div class="sec-head">
+      <span class="eyebrow">// capabilities</span>
+      <h2>The stack</h2>
+    </div>
+    <div class="cap-grid">
+      {
+        groups.map((group) => (
+          <div>
+            <div class="cap-label">{group.label}</div>
+            <div class="tags">
+              {group.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

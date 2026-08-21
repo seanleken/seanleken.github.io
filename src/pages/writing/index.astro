@@ -1,0 +1,35 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getSortedPosts, formatDate } from "@/lib/posts";
+
+const posts = await getSortedPosts();
+---
+
+<Base
+  title="Writing | Sean Pertet"
+  description="Notes on full-stack TypeScript engineering, architecture, and workflow."
+>
+  <main>
+    <div class="wrap sec-pad">
+      <div class="sec-head">
+        <span class="eyebrow">// writing</span>
+        <h2>Writing</h2>
+      </div>
+      <div class="posts">
+        {
+          posts.map(({ entry, readingTime }) => (
+            <article class="post">
+              <div class="post-meta">
+                <b>{formatDate(entry.data.date)}</b> &middot; {readingTime}
+                {entry.data.tags.length > 0 && <> &middot; {entry.data.tags.join(" / ")}</>}
+              </div>
+              <h3>{entry.data.title}</h3>
+              <p>{entry.data.excerpt}</p>
+              <a href={`/writing/${entry.id}`} class="read">Read →</a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</Base>
