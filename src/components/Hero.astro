@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import headshot from "@/assets/headshot.jpg";
+---
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-in">
+      <span class="eyebrow">// senior full-stack software engineer &middot; nairobi</span>
+      <h1>I ship <span>type-safe</span> products, end to end.</h1>
+      <p class="lede">
+        Senior full-stack TypeScript engineer with six years building production
+        systems, from React front-ends to Node services and the APIs, data
+        models, and types that connect them.
+      </p>
+      <div class="cta-row">
+        <a href="/projects" class="btn primary">View work</a>
+        <a href="#contact" class="btn">Get in touch</a>
+      </div>
+      <div class="locus">
+        TypeScript &middot; React &middot; Next.js &middot; Node.js &middot; 6 yrs
+      </div>
+    </div>
+
+    <div class="portrait hero-in" style="--d: 0.15s">
+      <Image src={headshot} alt="Sean Pertet" widths={[420, 640, 860]} sizes="(max-width: 860px) 85vw, 42vw" loading="eager" />
+    </div>
+  </div>
+</header>

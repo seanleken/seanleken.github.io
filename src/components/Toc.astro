@@ -1,0 +1,55 @@
+---
+import type { Heading } from "@/lib/headings";
+
+interface Props {
+  headings: Heading[];
+}
+const { headings } = Astro.props;
+
+// Numbering restarts from the first numbered entry, matching the CSS counters
+// in the article body. "Introduction" and "Conclusion" stay unnumbered.
+let n = 0;
+const items = headings.map((h) => {
+  if (h.numbered) n++;
+  return { ...h, label: h.numbered ? `${String(n).padStart(2, "0")} · ` : "" };
+});
+---
+
+<aside class="toc" aria-label="On this page">
+  <div class="lbl">On this page</div>
+  <ul>
+    {
+      items.map((h) => (
+        <li>
+          <a href={`#${h.slug}`} data-toc-link={h.slug}>
+            {h.label}
+            {h.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
+
+<script>
+  // Scroll-spy — replaces the useEffect/useState version.
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]");
+  const byId = new Map<string, HTMLAnchorElement>();
+  links.forEach((a) => byId.set(a.dataset.tocLink!, a));
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        links.forEach((a) => a.classList.remove("active"));
+        byId.get(entry.target.id)?.classList.add("active");
+      }
+    },
+    { rootMargin: "-40% 0px -55% 0px" },
+  );
+
+  byId.forEach((_, slug) => {
+    const el = document.getElementById(slug);
+    if (el) observer.observe(el);
+  });
+</script>

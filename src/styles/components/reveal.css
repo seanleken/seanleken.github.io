@@ -1,0 +1,58 @@
+/* Scroll reveals and the hero's load animation. Replaces Framer Motion.
+   Stagger is driven by a --d custom property set inline per element.
+
+   Every rule is scoped to `.js`, which an inline script in Base.astro adds to
+   <html> before paint. Without JavaScript nothing is hidden — the page renders
+   fully, just without the animation. The starting state here is `opacity: 0`,
+   so an unscoped version would leave the timeline permanently invisible to
+   anyone whose JS fails to load. The Framer version didn't have this failure
+   mode: it applied the hidden state during hydration, so no-JS meant no
+   animation rather than no content. */
+
+.js [data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.4s ease-out,
+    transform 0.4s ease-out;
+  transition-delay: var(--d, 0s);
+  will-change: opacity, transform;
+}
+.js [data-reveal="up"] {
+  transform: translateY(16px);
+}
+.js [data-reveal="left"] {
+  transform: translateX(-12px);
+}
+.js [data-reveal].in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero animates on load rather than on scroll — it is already in view. */
+.js .hero-in {
+  opacity: 0;
+  animation: hero-fade-up 0.5s ease-out var(--d, 0s) forwards;
+}
+@keyframes hero-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal].in-view {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .js .hero-in {
+    opacity: 1;
+    animation: none;
+  }
+}

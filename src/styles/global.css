@@ -1,0 +1,8 @@
+/* Light IDE design system. fonts.css supplies --font-sans/--font-mono;
+   tokens.css defines the custom properties everything else reads; layout/ is
+   shared chrome (base reset, nav, footer); components/ is every section- or
+   page-level component. See each folder's index.css. */
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./layout/index.css";
+@import "./components/index.css";

@@ -1,0 +1,41 @@
+---
+import { formatDate, type PostMeta } from "@/lib/posts";
+
+interface Props {
+  posts: PostMeta[];
+}
+
+const { posts } = Astro.props;
+const previewPosts = posts.slice(0, 2);
+---
+
+{
+  previewPosts.length > 0 && (
+    <section id="writing">
+      <div class="wrap sec-pad">
+        <div class="sec-head">
+          <div class="row">
+            <div>
+              <span class="eyebrow">// writing</span>
+              <h2>Latest articles</h2>
+            </div>
+            <a href="/writing" class="view-all">View all →</a>
+          </div>
+        </div>
+        <div class="posts">
+          {previewPosts.map(({ entry, readingTime }) => (
+            <article class="post">
+              <div class="post-meta">
+                <b>{formatDate(entry.data.date)}</b> &middot; {readingTime}
+                {entry.data.tags.length > 0 && <> &middot; {entry.data.tags.join(" / ")}</>}
+              </div>
+              <h3>{entry.data.title}</h3>
+              <p>{entry.data.excerpt}</p>
+              <a href={`/writing/${entry.id}`} class="read">Read →</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

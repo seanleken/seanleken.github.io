@@ -1,0 +1,18 @@
+---
+interface Props {
+  less: string;
+  more: string;
+}
+const { less, more } = Astro.props;
+---
+
+<div class="cmp">
+  <div class="card less">
+    <div class="tag">✗ less effective</div>
+    <div class="ex">{less}</div>
+  </div>
+  <div class="card more">
+    <div class="tag">✓ more effective</div>
+    <div class="ex">{more}</div>
+  </div>
+</div>

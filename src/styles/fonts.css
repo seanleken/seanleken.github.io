@@ -1,0 +1,10 @@
+/* Self-hosted via @fontsource-variable. next/font used to generate
+   --font-sans / --font-mono; tokens.css reads them, so we define them here
+   instead and leave tokens.css exactly as it was. */
+@import "@fontsource-variable/hanken-grotesk";
+@import "@fontsource-variable/jetbrains-mono";
+
+:root {
+  --font-sans: "Hanken Grotesk Variable";
+  --font-mono: "JetBrains Mono Variable";
+}
